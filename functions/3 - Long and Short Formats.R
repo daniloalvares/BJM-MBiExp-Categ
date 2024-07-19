@@ -126,4 +126,4 @@ datalot3 <- format_change(data_curr=datalot3_curr, data_prev=datalot2_prev)
 datalot4 <- format_change(data_curr=datalot4_curr, data_prev=datalot3_prev)
 
 
-rm(list=setdiff(ls(), c("datalot2","datalot3","datalot4")))
+rm(list=setdiff(ls(), c("datalot2")))

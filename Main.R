@@ -15,7 +15,7 @@ library(emdbook)
 library(pracma)
 library(parallel)
 library(cmdstanr)
-
+library(crfsuite)
 
 # ====================================================================== #
 # Loading data and applying inclusion/exclusion criteria
@@ -33,6 +33,13 @@ source("functions/3 - Long and Short Formats.R")
 # ====================================================================== #
 # Building the joint model in Stan
 source("functions/4 - Stan Model.R")
+# ====================================================================== #
+# Auxiliary functions
+# - Call model fitting functions
+# - Calculate the maximum a posteriori (MAP)
+# - Calculate individual weighted residuals (IWRES)
+# - Calculate multiclass classification metrics
+source("functions/5 - Auxiliary Functions.R")
 # ====================================================================== #
 
 

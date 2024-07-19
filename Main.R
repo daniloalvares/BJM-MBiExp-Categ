@@ -31,8 +31,8 @@ source("functions/2 - Standardisation and Imputation.R")
 # Creating longitudinal and categorical data
 source("functions/3 - Long and Short Formats.R")
 # ====================================================================== #
-# Building joint models in Stan
-source("functions/4 - Stan Models.R")
+# Building the joint model in Stan
+source("functions/4 - Stan Model.R")
 # ====================================================================== #
 
 

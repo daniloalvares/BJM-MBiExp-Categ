@@ -60,6 +60,6 @@ gq <- gq_jm(fit = fit$fit, data = datalot2)
 # Performance metrics for the joint model
 metrics_jm(fit1 = fit$fit, fit2 = gq$fit, data = datalot2)
 
-# Varible importance
+# Variable importance
 vi_jm(fit1 = fit$fit, fit2 = gq$fit, data = datalot2)
 # ====================================================================== #

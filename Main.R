@@ -36,10 +36,11 @@ source("functions/3 - Long and Short Formats.R")
 source("functions/4 - Stan Model.R")
 # ====================================================================== #
 # Auxiliary functions
-# - Call model fitting functions
 # - Calculate the maximum a posteriori (MAP)
+# - Call model fitting functions
 # - Calculate individual weighted residuals (IWRES)
 # - Calculate multiclass classification metrics
+# - Calculate the variable importance
 source("functions/5 - Auxiliary Functions.R")
 # ====================================================================== #
 
@@ -58,4 +59,7 @@ gq <- gq_jm(fit = fit$fit, data = datalot2)
 
 # Performance metrics for the joint model
 metrics_jm(fit1 = fit$fit, fit2 = gq$fit, data = datalot2)
+
+# Varible importance
+vi_jm(fit1 = fit$fit, fit2 = gq$fit, data = datalot2)
 # ====================================================================== #

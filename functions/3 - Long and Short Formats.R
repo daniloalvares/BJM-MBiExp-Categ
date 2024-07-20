@@ -42,7 +42,7 @@ format_change <- function(data_curr, data_prev){
     race[i] <- data_curr$race_ethnicity[pos][1]
     ecog[i] <- data_curr$ecoggrp[pos][1]
     iss[i] <- data_curr$iss_stage[pos][1]
-    chain_status[i] <- data_curr$chain_status[pos][1]
+    # chain_status[i] <- data_curr$chain_status[pos][1]
     
     # Continuous baseline variables
     age[i] <- data_curr$age[pos][1]
@@ -85,7 +85,7 @@ format_change <- function(data_curr, data_prev){
                       ID1=data_prev[!duplicated(data_prev$patientid),"ID1"],
                       sex=sex, race_0=race_0, race_1=race_1, race_2=race_2, race_3=race_3, 
                       ecog_0=ecog_0, ecog_1=ecog_1, ecog_2=ecog_2, ecog_3=ecog_3, 
-                      iss_0=iss_0, iss_1=iss_1, iss_2=iss_2, iss_3=iss_3, chain_status=chain_status,
+                      iss_0=iss_0, iss_1=iss_1, iss_2=iss_2, iss_3=iss_3, # chain_status=chain_status,
                       age=age, albumin=albumin, beta2_microglobulin=beta2_microglobulin,
                       creatinine=creatinine, hemoglobin=hemoglobin, ldh=ldh, lymphocyte=lymphocyte,
                       neutrophil=neutrophil, platelet=platelet, immunoglobulin_a=immunoglobulin_a, 

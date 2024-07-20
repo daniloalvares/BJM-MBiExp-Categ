@@ -12,6 +12,7 @@ MAP_fc <- function(x){
   out <- s$x[which(s$y==max(s$y))]
   
   return( out )
+    
 }
 
 
@@ -22,7 +23,6 @@ fit_jm <- function(data, iter=5000, warmup=1000, chains=3){
 
   vars <- c("sex","race_1","race_2","race_3","ecog_1","ecog_2","ecog_3","iss_1","iss_2","iss_3","age","albumin","beta2_microglobulin",
             "creatinine","hemoglobin","ldh","lymphocyte","neutrophil","platelet","immunoglobulin_a","immunoglobulin_g","immunoglobulin_m","duration")
-  
   X <- cbind(1, data$Short[,vars])
   
   # Model data
@@ -78,7 +78,6 @@ gq_jm <- function(fit, data){
 
   vars <- c("sex","race_1","race_2","race_3","ecog_1","ecog_2","ecog_3","iss_1","iss_2","iss_3","age","albumin","beta2_microglobulin",
             "creatinine","hemoglobin","ldh","lymphocyte","neutrophil","platelet","immunoglobulin_a","immunoglobulin_g","immunoglobulin_m","duration")
-  
   X <- cbind(1, data$Short[,vars])
   
   # Model data
@@ -180,7 +179,6 @@ vi_jm <- function(fit1, fit2, data, runs=50, criterion="WAIC"){
 
   vars <- c("sex","race_1","race_2","race_3","ecog_1","ecog_2","ecog_3","iss_1","iss_2","iss_3","age","albumin","beta2_microglobulin",
             "creatinine","hemoglobin","ldh","lymphocyte","neutrophil","platelet","immunoglobulin_a","immunoglobulin_g","immunoglobulin_m","duration")
-  
   X <- cbind(1, data$Short[,vars])
   
   # Model data

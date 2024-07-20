@@ -43,3 +43,18 @@ source("functions/5 - Auxiliary Functions.R")
 # ====================================================================== #
 
 
+# ====================================================================== #
+#     JOINT MODEL OF MULTIPLE LONGITUDINAL AND CATEGORICAL OUTCOMES      #
+# ====================================================================== #
+# Fitting the joint model
+fit <- fit_jm(data = datalot2)
+
+# Posterior summary
+fit$fit$summary(variables = c("theta_M","theta_F","sigma2_M","sigma2_F","Omega_M","Omega_F","beta_raw","alpha_raw"))
+
+# Generated quantities from the fitted joint model
+gq <- gq_jm(fit = fit$fit, data = datalot2)
+
+# Performance metrics for the joint model
+metrics_jm(fit1 = fit$fit, fit2 = gq$fit, data = datalot2)
+# ====================================================================== #

@@ -16,6 +16,7 @@ library(pracma)
 library(parallel)
 library(cmdstanr)
 library(crfsuite)
+library(forcats)
 
 # ====================================================================== #
 # Loading data and applying inclusion/exclusion criteria

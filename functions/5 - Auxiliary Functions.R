@@ -148,7 +148,8 @@ metrics_jm <- function(fit1, fit2, data){
     facet_wrap( ~ biom, ncol = 2) + scale_x_continuous(breaks = 0:6))
 
   # CATEGORICAL SUBMODEL
-  n <- nrow(data$Short)
+  z <- apply(cbind(data$Short$drug_1,data$Short$drug_2,data$Short$drug_0),1,which.max)
+  n <- length(z)
   z_pred <- rep(NA,n)
   for(i in 1:n){
     cat1 <- MAP_fc(as.vector(fit2$draws("probs")[,,i]))

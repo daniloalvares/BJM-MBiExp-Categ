@@ -72,7 +72,7 @@ fit_jm <- function(data, iter=5000, warmup=1000, chains=3){
 
 
 # Generated quantities from the fitted joint model
-gq_jm <- function(fit, data){
+gq_jm <- function(fit1, data){
   
   model <- cmdstan_model(JM_Biexp_Cat_VI)
 
@@ -98,7 +98,7 @@ gq_jm <- function(fit, data){
   z <- apply(cbind(data$Short$drug_1,data$Short$drug_2,data$Short$drug_0),1,which.max)
     
   i.time <- Sys.time()
-  fit <- suppressMessages(suppressWarnings( model$generate_quantities(fit,
+  fit <- suppressMessages(suppressWarnings( model$generate_quantities(fit1$fit,
                                                                       data = list(N_M=N_M, N_F=N_F, n_M=n_M, n_F=n_F, n=n, 
                                                                                   nbeta=nbeta, y_M=log(y_M+1), y_F=log(y_F+1),
                                                                                   ID_M1=ID_M1, ID_M2=ID_M2, ID_F1=ID_F1, ID_F2=ID_F2, 
@@ -125,12 +125,12 @@ metrics_jm <- function(fit1, fit2, data){
 
   # LONGITUDINAL SUBMODELS
   # Estimated trajectory for M-spike and FLC from the bi-exponential submodels
-  est_M <- apply(fit2$draws("nonlinpred_M"), 3, mean)
-  est_F <- apply(fit2$draws("nonlinpred_F"), 3, mean)
+  est_M <- apply(fit2$fit$draws("nonlinpred_M"), 3, mean)
+  est_F <- apply(fit2$fit$draws("nonlinpred_F"), 3, mean)
 
   # Estimated residual standard deviation for M-spike and FLC from the bi-exponential submodels
-  sig_M <- apply(sqrt(fit1$draws("sigma2_M")), 3, mean)
-  sig_F <- apply(sqrt(fit1$draws("sigma2_F")), 3, mean)
+  sig_M <- apply(sqrt(fit1$fit$draws("sigma2_M")), 3, mean)
+  sig_F <- apply(sqrt(fit1$fit$draws("sigma2_F")), 3, mean)
 
   # Individual weighted residuals (IWRES)
   iwres_M <- (log(data$Long$M_Spike$y+1) - est_M) / sig_M
@@ -152,9 +152,9 @@ metrics_jm <- function(fit1, fit2, data){
   n <- length(z)
   z_pred <- rep(NA,n)
   for(i in 1:n){
-    cat1 <- MAP_fc(as.vector(fit2$draws("probs")[,,i]))
-    cat2 <- MAP_fc(as.vector(fit2$draws("probs")[,,n+i]))
-    cat3 <- MAP_fc(as.vector(fit2$draws("probs")[,,2*n+i]))
+    cat1 <- MAP_fc(as.vector(fit2$fit$draws("probs")[,,i]))
+    cat2 <- MAP_fc(as.vector(fit2$fit$draws("probs")[,,n+i]))
+    cat3 <- MAP_fc(as.vector(fit2$fit$draws("probs")[,,2*n+i]))
     z_pred[i] <- which.max(c(cat1, cat2, cat3))
   }
 
@@ -228,7 +228,7 @@ vi_jm <- function(fit1, fit2, data, runs=50, criterion="WAIC"){
         if(j == (length(i.change)+6)){ IMP_D_F <- sample(1:n, size = n, replace = F) }
       }
     
-      fit <- suppressMessages(suppressWarnings( model$generate_quantities(fit1,
+      fit <- suppressMessages(suppressWarnings( model$generate_quantities(fit1$fit,
                                                                           data = list(N_M=N_M, N_F=N_F, n_M=n_M, n_F=n_F, n=n, 
                                                                                       nbeta=nbeta, y_M=log(y_M+1), y_F=log(y_F+1),
                                                                                       ID_M1=ID_M1, ID_M2=ID_M2, ID_F1=ID_F1, ID_F2=ID_F2, 
